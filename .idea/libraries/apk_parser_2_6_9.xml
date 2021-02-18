@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="apk-parser-2.6.9">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/apk-parser-2.6.9.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

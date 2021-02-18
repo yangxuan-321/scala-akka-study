@@ -17,5 +17,4 @@ val silencerV     = "1.6.0"
 libraryDependencies += "com.typesafe.akka" %% "akka-actor-typed"    % akkaV
 libraryDependencies += "com.typesafe.akka" %% "akka-stream"         % akkaV
 libraryDependencies += "commons-io"        % "commons-io"           % "2.6"
-libraryDependencies += "net.dongliu"       % "apk-parser"           % "2.6.9"
 libraryDependencies += "com.typesafe.akka" %% "akka-http"           % akkaHttpV
