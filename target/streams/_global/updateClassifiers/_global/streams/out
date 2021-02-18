@@ -1,0 +1,4 @@
+[0m[[0m[33mwarn[0m] [0m[0mwartremover_2.13-2.4.2-sources.jar no longer exists at /home/yangxuan/.cache/coursier/v1/https/repo1.iadmob.com/artifactory/maven-releases/org/wartremover/wartremover_2.13/2.4.2/wartremover_2.13-2.4.2-sources.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0m"not up to date. inChanged = false, force = false[0m
+[0m[[0m[0mdebug[0m] [0m[0mUpdating ProjectRef(uri("file:/opt/MODA/MODA-CODE/my-code/scala-akka-study/"), "scala-akka-study")...[0m
+[0m[[0m[0mdebug[0m] [0m[0mDone updating ProjectRef(uri("file:/opt/MODA/MODA-CODE/my-code/scala-akka-study/"), "scala-akka-study")[0m
