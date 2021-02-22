@@ -31,4 +31,52 @@ Actor。当你使用了Actor_A创建了一个Actor_B，那么Actor_A就是Actor_
 - ​    **/user** &emsp;&emsp; user监控者，用于在用户应用程序中创建自己的Actor时候的最顶层的Actor，用户应用程序创建的Actors都是它的后代。
 
 最简单有效的方法是通过打印ActorRef来观察系统中actor的层次结构。在下面的小实验中，我们创建一个acotr，然后打印这个actor的
-引用(ActorRef)。然后创建这个Actor的子Actor并且打印引用。
+引用(ActorRef)。然后创建这个Actor的子Actor并且打印它引用。
+```scala
+package org.moda.actor.code
+
+import akka.actor.typed.{ActorSystem, Behavior}
+import akka.actor.typed.scaladsl.{AbstractBehavior, ActorContext, Behaviors}
+
+object PrintMyActorRefActor {
+  def apply(): Behavior[String] = Behaviors.setup(context => new PrintMyActorRefActor(context))
+}
+
+class PrintMyActorRefActor(context: ActorContext[String]) extends AbstractBehavior[String](context) {
+  override def onMessage(msg: String): Behavior[String] =
+    msg match {
+      case "print" =>
+        // 创建第二个actor
+        val actorRef2 = context.spawn(Behaviors.empty[String], "second-actor")
+        println(s"second-actor: ${actorRef2}")
+        this
+    }
+}
+
+class Main(context: ActorContext[String]) extends AbstractBehavior[String](context) {
+  override def onMessage(msg: String): Behavior[String] =
+    msg match {
+      case "start" =>
+        // 创建第一个actor
+        val actorRef1 = context.spawn(PrintMyActorRefActor(), "first-actor")
+        println(s"first-actor: $actorRef1")
+        actorRef1 ! "print"
+        this
+    }
+}
+
+object Main {
+  def apply(): Behavior[String] = Behaviors.setup(context => new Main(context))
+}
+
+object ActorHierarchyExperiments extends App {
+  val testSystem = ActorSystem(Main(), "testSystem")
+  println(s"init-actor: $testSystem")
+  testSystem ! "start"
+}
+```
+
+*代码详见org/moda/actor/C1.scala*
+
+*初始化的通过message的方式让第一个actor去做该做的事情。我们通过使用第一个Actor(父亲)的ActorRef发送message: actorRef1 ! "print" 
+来调用（远程或者跨进程）               case匹配到的代码(PrintMyActorRefActor的onMessage方法)，该方法创建了创建并打印了第二个Actor*
